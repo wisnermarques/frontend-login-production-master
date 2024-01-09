@@ -1,0 +1,25 @@
+/* index.css */
+.footer {
+    margin-top: auto; /* Mantém o footer no final da página */
+    background-color: #343a40; /* Cor de fundo do footer (bg-dark) */
+    color: #ffffff; /* Cor do texto (text-white) */
+    padding: 20px 0; /* Espaçamento interno do footer (py-2) */
+    text-align: center;
+  } 
+  
+.highlight {
+    color: #ffc107;
+    /* Cor de destaque, você pode ajustar para a cor desejada */
+    font-weight: bold;
+    /* Deixa o texto em negrito para destacar */
+}
+
+.icon {
+    transition: opacity 0.3s ease-in-out;
+    /* Adiciona uma transição suave */
+}
+
+.icon:hover {
+    opacity: 0.7;
+    /* Diminui a opacidade ao passar o mouse */
+}

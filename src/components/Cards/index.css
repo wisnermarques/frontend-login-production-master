@@ -1,0 +1,106 @@
+/* styles.css */
+.card {
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.card-text a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: right;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+/* Estilizando os links */
+.card-text a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.card-text a:hover {
+  color: #0056b3;
+}
+
+/* Estilizando o endereço */
+.card-text.address {
+  font-size: 14px;
+  color: #888;
+}
+
+.card-text.address i {
+  color: #555;
+}
+
+/* Estilos para melhorar a aparência da janela de alerta */
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+}
+
+.alert {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra */
+  max-width: 300px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-confirm {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn:hover {
+  filter: brightness(1.2);
+}
