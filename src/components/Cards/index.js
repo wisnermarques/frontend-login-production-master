@@ -32,7 +32,7 @@ function Cards({ persons, handleDelete }) {
         </div>
       ) : (
         persons.map((person) => (
-          <div className='col-sm-4 my-2' key={person.id}>
+          <div className='col-md-6 my-2 col-lg-4' key={person.id}>
             <div className='card m-2 d-flex flex-column h-100'>
               <img
                 src={urlBase + person.foto}

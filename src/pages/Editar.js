@@ -34,7 +34,7 @@ function Editar() {
         setDataNascimento(formattedDate)
 
         setFoto(response.data.foto)
-        setFotoAntiga('http://localhost:3001/images/' + foto)
+        setFotoAntiga('/images/' + foto)
       })
       .catch((err) => navigate('/home'))
   }, [id, foto, navigate])
