@@ -33,7 +33,6 @@ function Editar() {
         ).toLocaleDateString('pt-BR')
         setDataNascimento(formattedDate)
 
-        setFoto(response.data.foto)
         setFotoAntiga('/images/' + foto)
       })
       .catch((err) => navigate('/home'))

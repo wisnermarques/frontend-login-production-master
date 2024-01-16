@@ -23,11 +23,18 @@ const create = (personObject) =>
 
 const remove = (id) => axios.delete(`${urlBase}/${id}`)
 
-const update = (id, personObject) => axios.put(`${urlBase}/${id}`, personObject)
+const update = (id, personObject) => {
+  const headers = {};
+  if (personObject.foto) {
+    headers['Content-Type'] = 'multipart/form-data';
+  }
+
+  return axios.post(`${urlBase}/update/${id}`, personObject, { headers });
+};
 
 const login = (credentials) => {
   const response = axios.post(urlLogin, credentials)
-  
+
   return response.data
 }
 
