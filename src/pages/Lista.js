@@ -20,7 +20,7 @@ function Lista() {
   const [showForm, setShowForm] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [submitting, setSubmitting] = useState(false)
+  const [submitting, setSubmitting] = useState(false); // Novo estado para indicar o envio do formulário
 
   useEffect(() => {
     fetchData() // Carrega os dados iniciais
@@ -55,8 +55,6 @@ function Lista() {
 
   const addPerson = async (event) => {
     event.preventDefault()
-    setSubmitting(true) // Ativar o indicador de envio
-
     const personObject = {
       nome,
       numero,
@@ -65,18 +63,16 @@ function Lista() {
       dataNascimento,
       foto,
     }
+    setSubmitting(true)
+    await personService.create(personObject)
+    
 
-    try {
-      await personService.create(personObject)
-      setNome('')
-      setNumero('')
-      setFoto(null)
-      fetchData()
-    } catch (error) {
-      console.error('Erro ao cadastrar pessoa:', error)
-    } finally {
-      setSubmitting(false) // Desativar o indicador de envio, independentemente do resultado
-    }
+    setNome('')
+    setNumero('')
+    setFoto(null) // Limpar a imagem após o envio
+
+    // Após a criação, atualize a lista de persons chamando fetchData novamente
+    fetchData()
   }
 
   const handleNomeChange = (event) => {
@@ -208,18 +204,8 @@ function Lista() {
                         />
                       )}
                     </div>
-                    <button
-                      onClick={toggleForm}
-                      className={`btn btn-success ${
-                        submitting ? 'disabled' : ''
-                      }`}
-                      disabled={submitting}
-                    >
-                      {submitting
-                        ? 'Cadastrando...'
-                        : showForm
-                        ? 'Voltar para a Lista'
-                        : 'Cadastrar Pessoa'}
+                    <button className='btn btn-success m-2' disabled={loading}>
+                      {submitting ? 'Salvando...' : 'Salvar'}
                     </button>
                   </form>
                 </>
