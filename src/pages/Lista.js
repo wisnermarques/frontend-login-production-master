@@ -19,19 +19,23 @@ function Lista() {
   const [fotoPreview, setFotoPreview] = useState(null) // Adicionando estado para a prévia da imagem
   const [showForm, setShowForm] = useState(false)
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchData() // Carrega os dados iniciais
   }, [])
 
   const fetchData = () => {
+    setLoading(true)
     personService
       .getAll()
       .then((response) => {
         setPersons(response.data)
+        setLoading(false)
         setShowForm(false)
       })
       .catch((error) => {
+        setLoading(false)
         if (error.response) {
           // O servidor respondeu com um status de erro
           console.error('Erro na requisição:', error.response)
@@ -126,7 +130,9 @@ function Lista() {
       <main className='flex-grow-1'>
         <div className='container animate__animated animate__fadeIn'>
           <h2 className='mt-2'>Listar e Cadastrar Pessoas</h2>
-          {error ? (
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
             <p className='alert alert-warning' role='alert'>
               {error}
             </p>
