@@ -20,6 +20,7 @@ function Lista() {
   const [showForm, setShowForm] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     fetchData() // Carrega os dados iniciais
@@ -54,6 +55,8 @@ function Lista() {
 
   const addPerson = async (event) => {
     event.preventDefault()
+    setSubmitting(true) // Ativar o indicador de envio
+
     const personObject = {
       nome,
       numero,
@@ -63,14 +66,17 @@ function Lista() {
       foto,
     }
 
-    await personService.create(personObject)
-
-    setNome('')
-    setNumero('')
-    setFoto(null) // Limpar a imagem após o envio
-
-    // Após a criação, atualize a lista de persons chamando fetchData novamente
-    fetchData()
+    try {
+      await personService.create(personObject)
+      setNome('')
+      setNumero('')
+      setFoto(null)
+      fetchData()
+    } catch (error) {
+      console.error('Erro ao cadastrar pessoa:', error)
+    } finally {
+      setSubmitting(false) // Desativar o indicador de envio, independentemente do resultado
+    }
   }
 
   const handleNomeChange = (event) => {
@@ -202,7 +208,19 @@ function Lista() {
                         />
                       )}
                     </div>
-                    <button className='btn btn-success'>Cadastrar</button>
+                    <button
+                      onClick={toggleForm}
+                      className={`btn btn-success ${
+                        submitting ? 'disabled' : ''
+                      }`}
+                      disabled={submitting}
+                    >
+                      {submitting
+                        ? 'Cadastrando...'
+                        : showForm
+                        ? 'Voltar para a Lista'
+                        : 'Cadastrar Pessoa'}
+                    </button>
                   </form>
                 </>
               ) : (
