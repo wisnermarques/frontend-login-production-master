@@ -17,6 +17,7 @@ function Editar() {
   const [foto, setFoto] = useState(null)
   const [fotoPreview, setFotoPreview] = useState(null)
   const [fotoAntiga, setFotoAntiga] = useState(null) // Adicionando estado para a prévia da imagem
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     personService
@@ -81,6 +82,7 @@ function Editar() {
 
   const editPerson = async (event) => {
     event.preventDefault()
+    setLoading(true)
 
     // String no formato "dd/mm/aaaa"
     const dataString = dataNascimento
@@ -106,6 +108,7 @@ function Editar() {
     console.log(personObject)
 
     await personService.update(id, personObject)
+    setLoading(false)
 
     navigate('/lista')
   }
@@ -192,7 +195,10 @@ function Editar() {
                 />
               ) : null}
             </div>
-            <button className='btn btn-success m-2'>Salvar</button>
+            <button className='btn btn-success m-2' disabled={loading}>
+              {loading ? 'Salvando...' : 'Salvar'}
+            </button>
+
             <button className='btn btn-danger m-2' onClick={() => cancel()}>
               Cancelar
             </button>
