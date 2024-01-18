@@ -133,7 +133,7 @@ function Lista() {
         <div className='container animate__animated animate__fadeIn'>
           <h2 className='mt-2'>Listar e Cadastrar Pessoas</h2>
           {loading ? (
-            <p>Loading...</p>
+            <p>Carregando...</p>
           ) : error ? (
             <p className='alert alert-warning' role='alert'>
               {error}
