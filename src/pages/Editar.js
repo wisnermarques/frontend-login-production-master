@@ -34,7 +34,7 @@ function Editar() {
         ).toLocaleDateString('pt-BR')
         setDataNascimento(formattedDate)
 
-        setFotoAntiga('/images/' + foto)
+        setFotoAntiga('/images/' + response.data.foto)
       })
       .catch((err) => navigate('/home'))
   }, [id, foto, navigate])
@@ -181,19 +181,20 @@ function Editar() {
                 className='form-control-file m-2'
                 onChange={handleFileChange}
               />
-              {fotoPreview ? (
+              {fotoPreview && (
                 <img
                   src={fotoPreview}
                   alt='Preview'
                   style={{ maxWidth: '200px' }}
                 />
-              ) : fotoAntiga ? (
+              )}
+              {!fotoPreview && fotoAntiga && (
                 <img
                   src={fotoAntiga}
                   alt='Preview'
                   style={{ maxWidth: '200px' }}
                 />
-              ) : null}
+              )}
             </div>
             <button className='btn btn-success m-2' disabled={loading}>
               {loading ? 'Salvando...' : 'Salvar'}
